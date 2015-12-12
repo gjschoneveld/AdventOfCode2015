@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Day12
 {
@@ -9,31 +10,10 @@ namespace Day12
     {
         static List<int> NumbersInString(string x)
         {
-            List<int> result = new List<int>();
+            Regex numberRegex = new Regex(@"(-?\d+)", RegexOptions.Compiled);
+            MatchCollection matches = numberRegex.Matches(x);
 
-            for (int i = 0; i < x.Length; i++)
-            {
-                if (char.IsDigit(x[i]))
-                {
-                    int start = i;
-                    if (x[i - 1] == '-')
-                    {
-                        start--;
-                    }
-
-                    int end = i;
-                    while (char.IsDigit(x[end]))
-                    {
-                        end++;
-                    }
-
-                    var numberString = x.Substring(start, end - start);
-                    int number = int.Parse(numberString);
-                    result.Add(number);
-
-                    i = end;
-                }
-            }
+            List<int> result = matches.Cast<Match>().Select(m => int.Parse(m.Value)).ToList();
 
             return result;
         }
@@ -97,24 +77,10 @@ namespace Day12
 
         static List<Tuple<int, int>> RemoveOverlappingLocations(List<Tuple<int, int>> locations)
         {
-            List<Tuple<int, int>> result = new List<Tuple<int, int>>();
-
-            foreach (var loc in locations)
-            {
-                bool contained = false;
-                foreach (var other in locations)
-                {
-                    if (other.Item1 < loc.Item1 && other.Item2 > loc.Item2)
-                    {
-                        contained = true;
-                    }
-                }
-
-                if (!contained)
-                {
-                    result.Add(loc);
-                }
-            }
+            var result = locations.Where(loc => {
+                bool hasOverlap = locations.Any(other => other.Item1 < loc.Item1 && loc.Item2 < other.Item2);
+                return !hasOverlap; 
+            }).ToList();
 
             return result;
         }
