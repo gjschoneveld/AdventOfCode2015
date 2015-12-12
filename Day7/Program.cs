@@ -119,7 +119,7 @@ namespace Day7
         public override ushort Value(Dictionary<string,ushort> knownSignals)
         {
             ushort x = GetValue(knownSignals, 0);
- 	        return (ushort)(x << amount);
+             return (ushort)(x << amount);
         }
 
         public override string ToString()
@@ -135,7 +135,7 @@ namespace Day7
         public override ushort Value(Dictionary<string,ushort> knownSignals)
         {
             ushort x = GetValue(knownSignals, 0);
- 	        return (ushort)(x >> amount);
+             return (ushort)(x >> amount);
         }
 
         public override string ToString()
@@ -149,7 +149,7 @@ namespace Day7
         public override ushort Value(Dictionary<string,ushort> knownSignals)
         {
             ushort x = GetValue(knownSignals, 0);
- 	        return (ushort)~x;
+             return (ushort)~x;
         }
 
         public override string ToString()

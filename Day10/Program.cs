@@ -46,9 +46,9 @@ namespace Day10
 
             string temp = input;
             for (int i = 0; i < times; i++)
-			{
+            {
                 temp = Encode(temp);
-			}
+            }
 
             Console.WriteLine("Answer 1: {0}", temp.Length);
 

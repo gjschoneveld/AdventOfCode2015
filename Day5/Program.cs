@@ -16,25 +16,25 @@ namespace Day5
             // letter twice in a row
             bool letterTwice = false;
             for (int i = 1; i < x.Length; i++)
-			{
-			    if (x[i] == x[i - 1]) 
+            {
+                if (x[i] == x[i - 1]) 
                 {
                     letterTwice = true;
                     break;
                 }
-			}
+            }
 
             // forbidden strings
             bool forbidden = false;
             string[] forbiddenSegments = { "ab", "cd", "pq", "xy" };
             foreach (var segment in forbiddenSegments)
-        	{
+            {
                 if (x.Contains(segment)) 
                 {
                     forbidden = true;
                     break;
                 }
-        	}
+            }
 
             return threeVowels && letterTwice && !forbidden;
         }
@@ -74,13 +74,13 @@ namespace Day5
             // letter repeating
             bool letterRepeating = false;
             for (int i = 2; i < x.Length; i++)
-			{
-			    if (x[i] == x[i - 2]) 
+            {
+                if (x[i] == x[i - 2]) 
                 {
                     letterRepeating = true;
                     break;
                 }
-			}
+            }
 
             return doublePair && letterRepeating;
         }

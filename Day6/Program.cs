@@ -48,14 +48,14 @@ namespace Day6
             // ... parse the values
             List<int> values = new List<int>();
             for (int i = 0; i < digitEnd.Count; i++)
-			{
+            {
                 int length = digitEnd[i] - digitStart[i] + 1;
                 string valueString = x.Substring(digitStart[i], length);
 
                 int value = int.Parse(valueString);
 
                 values.Add(value);
-			}
+            }
 
             // ... store them in the command
             res.start = new Tuple<int, int>(values[0], values[1]);

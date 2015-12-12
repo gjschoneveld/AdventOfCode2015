@@ -12,17 +12,17 @@ namespace Day11
             // straight of three
             bool hasStraight = false;
             for (int i = 0; i < x.Length - 2; i++)
-			{
+            {
                 char c0 = x[i];
                 char c1 = x[i + 1];
                 char c2 = x[i + 2];
 
-			    if (c1 - c0 == 1 && c2 - c1 == 1) 
+                if (c1 - c0 == 1 && c2 - c1 == 1) 
                 {
                     hasStraight = true;
                     break;
                 }
-			}
+            }
 
             // no forbidden i o l
             bool forbiddenChars = x.Contains('i') || x.Contains('o') || x.Contains('l');
@@ -30,7 +30,7 @@ namespace Day11
             // at least two distinct pairs
             int pairs = 0;
             for (int i = 0; i < x.Length - 1; i++)
-			{
+            {
                 char c0 = x[i];
                 char c1 = x[i + 1];
 
