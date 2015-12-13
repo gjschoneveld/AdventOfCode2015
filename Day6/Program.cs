@@ -14,13 +14,16 @@ namespace Day6
         {
             // parse command type
             Command res = null;
-            if (x.StartsWith("turn on")) {
+            if (x.StartsWith("turn on"))
+            {
                 res = new OnCmd();
             }
-            else if (x.StartsWith("turn off")) {
+            else if (x.StartsWith("turn off"))
+            {
                 res = new OffCmd();
             }
-            else if (x.StartsWith("toggle")) {
+            else if (x.StartsWith("toggle"))
+            {
                 res = new ToggleCmd();
             }
 
@@ -151,7 +154,7 @@ namespace Day6
 
             foreach (var cmd in commands)
             {
-                cmd.Apply1(grid1);    
+                cmd.Apply1(grid1);
             }
 
             int count1 = 0;

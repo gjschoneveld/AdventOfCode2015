@@ -26,7 +26,7 @@ namespace Day9
         }
 
         public static Edge Parse(string x)
-        { 
+        {
             // Faerun to Tristram = 65
             var parts = x.Split(' ');
 
@@ -70,11 +70,11 @@ namespace Day9
 
             if (min == int.MaxValue)
             {
-                return new Tuple<int,int>(0, 0);
+                return new Tuple<int, int>(0, 0);
             }
             else
             {
-                return new Tuple<int,int>(min, max);
+                return new Tuple<int, int>(min, max);
             }
         }
 
@@ -91,7 +91,7 @@ namespace Day9
                 max = Math.Max(max, distance.Item2);
             }
 
-            return new Tuple<int,int>(min, max);
+            return new Tuple<int, int>(min, max);
         }
 
         static HashSet<string> visited;

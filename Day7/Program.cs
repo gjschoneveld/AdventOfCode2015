@@ -26,11 +26,11 @@ namespace Day7
         public ushort GetValue(Dictionary<string, ushort> knownSignals, int index)
         {
             var input = inputs[index];
-            if (IsConstant(input)) 
+            if (IsConstant(input))
             {
                 return ushort.Parse(input);
             }
-            else 
+            else
             {
                 return knownSignals[input];
             }
@@ -116,10 +116,10 @@ namespace Day7
     {
         public ushort amount;
 
-        public override ushort Value(Dictionary<string,ushort> knownSignals)
+        public override ushort Value(Dictionary<string, ushort> knownSignals)
         {
             ushort x = GetValue(knownSignals, 0);
-             return (ushort)(x << amount);
+            return (ushort)(x << amount);
         }
 
         public override string ToString()
@@ -132,10 +132,10 @@ namespace Day7
     {
         public ushort amount;
 
-        public override ushort Value(Dictionary<string,ushort> knownSignals)
+        public override ushort Value(Dictionary<string, ushort> knownSignals)
         {
             ushort x = GetValue(knownSignals, 0);
-             return (ushort)(x >> amount);
+            return (ushort)(x >> amount);
         }
 
         public override string ToString()
@@ -146,10 +146,10 @@ namespace Day7
 
     class Not : Gate
     {
-        public override ushort Value(Dictionary<string,ushort> knownSignals)
+        public override ushort Value(Dictionary<string, ushort> knownSignals)
         {
             ushort x = GetValue(knownSignals, 0);
-             return (ushort)~x;
+            return (ushort)~x;
         }
 
         public override string ToString()
@@ -160,7 +160,7 @@ namespace Day7
 
     class And : Gate
     {
-        public override ushort Value(Dictionary<string,ushort> knownSignals)
+        public override ushort Value(Dictionary<string, ushort> knownSignals)
         {
             ushort x = GetValue(knownSignals, 0);
             ushort y = GetValue(knownSignals, 1);
@@ -175,7 +175,7 @@ namespace Day7
 
     class Or : Gate
     {
-        public override ushort Value(Dictionary<string,ushort> knownSignals)
+        public override ushort Value(Dictionary<string, ushort> knownSignals)
         {
             ushort x = GetValue(knownSignals, 0);
             ushort y = GetValue(knownSignals, 1);

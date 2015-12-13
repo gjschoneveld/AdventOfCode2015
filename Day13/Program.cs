@@ -7,7 +7,7 @@ namespace Day13
 {
     class Rule
     {
-        public Tuple <string,string> persons;
+        public Tuple<string, string> persons;
         public int happinessGain;
 
         public static Rule Parse(string x)
@@ -23,7 +23,7 @@ namespace Day13
 
             Rule result = new Rule
             {
-                persons = new Tuple<string,string>(parts[0], parts[10]),
+                persons = new Tuple<string, string>(parts[0], parts[10]),
                 happinessGain = happinessGain
             };
 
@@ -106,8 +106,8 @@ namespace Day13
             string me = "me";
             foreach (var p in persons1)
             {
-                happiness.Add(new Tuple<string,string>(me, p), 0);
-                happiness.Add(new Tuple<string,string>(p, me), 0);
+                happiness.Add(new Tuple<string, string>(me, p), 0);
+                happiness.Add(new Tuple<string, string>(p, me), 0);
             }
 
             // add me to unique persons and generate all permutations 

@@ -17,7 +17,7 @@ namespace Day5
             bool letterTwice = false;
             for (int i = 1; i < x.Length; i++)
             {
-                if (x[i] == x[i - 1]) 
+                if (x[i] == x[i - 1])
                 {
                     letterTwice = true;
                     break;
@@ -29,7 +29,7 @@ namespace Day5
             string[] forbiddenSegments = { "ab", "cd", "pq", "xy" };
             foreach (var segment in forbiddenSegments)
             {
-                if (x.Contains(segment)) 
+                if (x.Contains(segment))
                 {
                     forbidden = true;
                     break;
@@ -75,7 +75,7 @@ namespace Day5
             bool letterRepeating = false;
             for (int i = 2; i < x.Length; i++)
             {
-                if (x[i] == x[i - 2]) 
+                if (x[i] == x[i - 2])
                 {
                     letterRepeating = true;
                     break;

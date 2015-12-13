@@ -14,8 +14,9 @@ namespace Day2
         public static Box Parse(string input)
         {
             string[] dimensionString = input.Split('x');
-            
-            Box result = new Box {
+
+            Box result = new Box
+            {
                 length = int.Parse(dimensionString[0]),
                 width = int.Parse(dimensionString[1]),
                 height = int.Parse(dimensionString[2])

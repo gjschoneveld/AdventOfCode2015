@@ -17,7 +17,7 @@ namespace Day11
                 char c1 = x[i + 1];
                 char c2 = x[i + 2];
 
-                if (c1 - c0 == 1 && c2 - c1 == 1) 
+                if (c1 - c0 == 1 && c2 - c1 == 1)
                 {
                     hasStraight = true;
                     break;
@@ -34,7 +34,7 @@ namespace Day11
                 char c0 = x[i];
                 char c1 = x[i + 1];
 
-                if (c0 == c1) 
+                if (c0 == c1)
                 {
                     pairs++;
                     i++;

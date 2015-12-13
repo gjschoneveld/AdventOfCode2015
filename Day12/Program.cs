@@ -32,11 +32,11 @@ namespace Day12
                 int depth = 0;
                 while (depth >= 0)
                 {
-                    if (x[start] == ']' || x[start] == '}') 
+                    if (x[start] == ']' || x[start] == '}')
                     {
                         depth++;
                     }
-                    if (x[start] == '[' || x[start] == '{') 
+                    if (x[start] == '[' || x[start] == '{')
                     {
                         depth--;
                     }
@@ -66,7 +66,7 @@ namespace Day12
                 bool isObject = x[start] == '{';
                 if (isObject)
                 {
-                    result.Add(new Tuple<int,int>(start, end));
+                    result.Add(new Tuple<int, int>(start, end));
                 }
 
                 index = x.IndexOf(searchString, index + 1);
@@ -77,9 +77,10 @@ namespace Day12
 
         static List<Tuple<int, int>> RemoveOverlappingLocations(List<Tuple<int, int>> locations)
         {
-            var result = locations.Where(loc => {
+            var result = locations.Where(loc =>
+            {
                 bool hasOverlap = locations.Any(other => other.Item1 < loc.Item1 && loc.Item2 < other.Item2);
-                return !hasOverlap; 
+                return !hasOverlap;
             }).ToList();
 
             return result;

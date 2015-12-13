@@ -31,7 +31,8 @@ namespace Day4
             string hash;
 
             int x = 0;
-            do {
+            do
+            {
                 x++;
                 hash = CalculateMD5Hash(input + x.ToString());
             } while (!hash.StartsWith("00000"));
