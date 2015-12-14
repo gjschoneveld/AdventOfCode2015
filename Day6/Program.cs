@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Day6
 {
@@ -9,6 +10,16 @@ namespace Day6
     {
         protected Tuple<int, int> start;
         protected Tuple<int, int> end;
+
+        static List<int> NumbersInString(string x)
+        {
+            Regex numberRegex = new Regex(@"(-?\d+)", RegexOptions.Compiled);
+            MatchCollection matches = numberRegex.Matches(x);
+
+            List<int> result = matches.Cast<Match>().Select(m => int.Parse(m.Value)).ToList();
+
+            return result;
+        }
 
         public static Command Parse(string x)
         {
@@ -27,40 +38,8 @@ namespace Day6
                 res = new ToggleCmd();
             }
 
-            // parse positions ...
-            // ... find their locations in the string
-            var digitStart = new List<int>();
-            var digitEnd = new List<int>();
-
-            bool inDigit = false;
-            for (int i = 0; i < x.Length; i++)
-            {
-                if (!inDigit && char.IsDigit(x[i]))
-                {
-                    digitStart.Add(i);
-                    inDigit = true;
-                }
-
-                if (inDigit && (i + 1 == x.Length || !char.IsDigit(x[i + 1])))
-                {
-                    digitEnd.Add(i);
-                    inDigit = false;
-                }
-            }
-
-            // ... parse the values
-            List<int> values = new List<int>();
-            for (int i = 0; i < digitEnd.Count; i++)
-            {
-                int length = digitEnd[i] - digitStart[i] + 1;
-                string valueString = x.Substring(digitStart[i], length);
-
-                int value = int.Parse(valueString);
-
-                values.Add(value);
-            }
-
-            // ... store them in the command
+            // parse positions and store them in the command
+            List<int> values = NumbersInString(x);
             res.start = new Tuple<int, int>(values[0], values[1]);
             res.end = new Tuple<int, int>(values[2], values[3]);
 
