@@ -7,23 +7,23 @@ namespace Day7
 {
     abstract class Gate
     {
-        public List<string> inputs;
+        private List<string> inputs;
         public string output;
 
         abstract public ushort Value(Dictionary<string, ushort> knownSignals);
 
-        public bool IsConstant(string input)
+        private bool IsConstant(string input)
         {
             ushort value;
             return ushort.TryParse(input, out value);
         }
 
-        public bool HasValue(Dictionary<string, ushort> knownSignals)
+        public bool AreAllInputsKnown(Dictionary<string, ushort> knownSignals)
         {
             return inputs.Where(i => !IsConstant(i)).All(i => knownSignals.ContainsKey(i));
         }
 
-        public ushort GetValue(Dictionary<string, ushort> knownSignals, int index)
+        protected ushort GetInput(Dictionary<string, ushort> knownSignals, int index)
         {
             var input = inputs[index];
             if (IsConstant(input))
@@ -103,12 +103,7 @@ namespace Day7
     {
         public override ushort Value(Dictionary<string, ushort> knownSignals)
         {
-            return GetValue(knownSignals, 0);
-        }
-
-        public override string ToString()
-        {
-            return inputs[0] + " -> " + output;
+            return GetInput(knownSignals, 0);
         }
     }
 
@@ -118,13 +113,8 @@ namespace Day7
 
         public override ushort Value(Dictionary<string, ushort> knownSignals)
         {
-            ushort x = GetValue(knownSignals, 0);
+            ushort x = GetInput(knownSignals, 0);
             return (ushort)(x << amount);
-        }
-
-        public override string ToString()
-        {
-            return inputs[0] + " LSHIFT " + amount + " -> " + output;
         }
     }
 
@@ -134,13 +124,8 @@ namespace Day7
 
         public override ushort Value(Dictionary<string, ushort> knownSignals)
         {
-            ushort x = GetValue(knownSignals, 0);
+            ushort x = GetInput(knownSignals, 0);
             return (ushort)(x >> amount);
-        }
-
-        public override string ToString()
-        {
-            return inputs[0] + " RSHIFT " + amount + " -> " + output;
         }
     }
 
@@ -148,13 +133,8 @@ namespace Day7
     {
         public override ushort Value(Dictionary<string, ushort> knownSignals)
         {
-            ushort x = GetValue(knownSignals, 0);
+            ushort x = GetInput(knownSignals, 0);
             return (ushort)~x;
-        }
-
-        public override string ToString()
-        {
-            return "NOT " + inputs[0] + " -> " + output;
         }
     }
 
@@ -162,14 +142,9 @@ namespace Day7
     {
         public override ushort Value(Dictionary<string, ushort> knownSignals)
         {
-            ushort x = GetValue(knownSignals, 0);
-            ushort y = GetValue(knownSignals, 1);
+            ushort x = GetInput(knownSignals, 0);
+            ushort y = GetInput(knownSignals, 1);
             return (ushort)(x & y);
-        }
-
-        public override string ToString()
-        {
-            return inputs[0] + " AND " + inputs[1] + " -> " + output;
         }
     }
 
@@ -177,14 +152,9 @@ namespace Day7
     {
         public override ushort Value(Dictionary<string, ushort> knownSignals)
         {
-            ushort x = GetValue(knownSignals, 0);
-            ushort y = GetValue(knownSignals, 1);
+            ushort x = GetInput(knownSignals, 0);
+            ushort y = GetInput(knownSignals, 1);
             return (ushort)(x | y);
-        }
-
-        public override string ToString()
-        {
-            return inputs[0] + " OR " + inputs[1] + " -> " + output;
         }
     }
 
@@ -205,7 +175,7 @@ namespace Day7
                         continue;
                     }
 
-                    if (!g.HasValue(knownSignals))
+                    if (!g.AreAllInputsKnown(knownSignals))
                     {
                         // not all inputs are known -> mark as not done yet & skipping
                         unknownSeen = true;
@@ -227,15 +197,6 @@ namespace Day7
             string[] gateStrings = input.Split('\n');
 
             var gates = gateStrings.Select(gs => Gate.Parse(gs)).ToList();
-
-            // check for parse errors
-            for (int i = 0; i < gateStrings.Length; i++)
-            {
-                if (gateStrings[i] != gates[i].ToString())
-                {
-                    Console.WriteLine("Parse Error");
-                }
-            }
 
             // simulate
             Dictionary<string, ushort> knownSignals = new Dictionary<string, ushort>();
