@@ -11,13 +11,13 @@ namespace Day14
 
         int speed;
         int busyTime;
-        int restTime;
+        int idleTime;
 
         public int points;
 
         public int DistanceAfter(int seconds)
         {
-            int periodTime = busyTime + restTime;
+            int periodTime = busyTime + idleTime;
 
             int fullPeriods = seconds / periodTime;
             int remainingTime = seconds % periodTime;
@@ -46,7 +46,7 @@ namespace Day14
                 name = parts[0],
                 speed = int.Parse(parts[3]),
                 busyTime = int.Parse(parts[6]),
-                restTime = int.Parse(parts[13]),
+                idleTime = int.Parse(parts[13]),
             };
 
             return result;
